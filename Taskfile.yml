@@ -1,0 +1,21 @@
+# https://taskfile.dev
+
+version: '2'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - poetry run flask run
+    silent: true
+    env:
+      FLASK_APP: funicular
+      FLASK_ENV: development
+  dependencies:
+    cmds:
+      - poetry install
+  format:
+    cmds:
+      - black .
