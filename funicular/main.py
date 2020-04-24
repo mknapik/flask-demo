@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from pprint import pprint
 from toolz.dicttoolz import keyfilter
 from typing import NamedTuple
+from injector import inject, Injector, Binder, singleton
 
 from .error import ApplicationError
 from .config import (
@@ -10,8 +11,8 @@ from .config import (
     Config,
     ProductionConfig,
     ProductionFlaskConfig,
+    FlaskConfig,
 )
-
 
 def build_app(config: Config):
     flask = Flask(__name__)
@@ -20,9 +21,24 @@ def build_app(config: Config):
 
     return flask
 
+class Foo():
+    @inject
+    def __init__(self, config: Config):
+        self._app =  build_app(config)
 
-app = build_app(ProductionConfig(ProductionFlaskConfig))
-app = build_app(DevConfig(DevFlaskConfig))
+    @property
+    def app(self):
+        return self._app
+
+
+def configure_for_testing(binder: Binder):
+    binder.bind(FlaskConfig, to=DevFlaskConfig, scope=singleton)
+    binder.bind(Config, to=DevConfig, scope=singleton)
+
+injector = Injector([configure_for_testing])
+# app = build_app(ProductionConfig(ProductionFlaskConfig))
+# app = build_app(DevConfig(DevFlaskConfig))
+app = injector.get(Foo).app
 
 
 @app.route("/env")

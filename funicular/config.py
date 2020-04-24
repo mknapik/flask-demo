@@ -1,5 +1,6 @@
 import abc
 from typing import NamedTuple
+from injector import inject
 
 
 class FlaskConfig(NamedTuple):
@@ -7,11 +8,12 @@ class FlaskConfig(NamedTuple):
     TESTING: bool
 
 
-DevFlaskConfig = FlaskConfig(DEBUG=True, TESTING=True)
-ProductionFlaskConfig = FlaskConfig(DEBUG=False, TESTING=False)
+DevFlaskConfig = lambda: FlaskConfig(DEBUG=True, TESTING=True)
+ProductionFlaskConfig = lambda: FlaskConfig(DEBUG=False, TESTING=False)
 
 
 class Config(object):
+    @inject
     def __init__(self, flask_config: FlaskConfig):
         self.flask_config = flask_config
 
