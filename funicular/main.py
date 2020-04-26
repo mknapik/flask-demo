@@ -10,12 +10,12 @@ from .config import (
 )
 
 
-def configure_for_testing(binder: Binder):
+def configure_for_development(binder: Binder):
     binder.bind(FlaskConfig, to=DevFlaskConfig, scope=singleton)
     binder.bind(Config, to=DevConfig, scope=singleton)
 
 
-injector = Injector([configure_for_testing])
+injector = Injector([configure_for_development])
 app = injector.get(AppFactory).app
 
 FlaskInjector(app=app)
