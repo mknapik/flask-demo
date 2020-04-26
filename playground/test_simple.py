@@ -1,9 +1,10 @@
-from pytest import fixture, raises
-from pytest_describe import behaves_like
-from .playground import Config, DevConfig, Foo, foo
-from injector import Injector, Binder, Module, provider
 from expects import expect, have_property, be_a
 from expects.matchers.built_in import equal
+from injector import Injector, Binder, Module, provider
+from pytest import fixture, raises
+from pytest_describe import behaves_like
+
+from .simple import Config, DevConfig, Foo, foo
 
 
 def describe_object():
