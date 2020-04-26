@@ -1,15 +1,27 @@
 import abc
-from typing import NamedTuple
 from injector import inject
 
 
-class FlaskConfig(NamedTuple):
+class FlaskConfig(object):
     DEBUG: bool
     TESTING: bool
 
+    def __init__(self):
+        pass
 
-DevFlaskConfig = lambda: FlaskConfig(DEBUG=True, TESTING=True)
-ProductionFlaskConfig = lambda: FlaskConfig(DEBUG=False, TESTING=False)
+
+class DevFlaskConfig(FlaskConfig):
+    def __init__(self):
+        super().__init__()
+        self.DEBUG: bool = True
+        self.TESTING: bool = True
+
+
+class ProductionFlaskConfig(FlaskConfig):
+    def __init__(self):
+        super().__init__()
+        self.DEBUG: bool = False
+        self.TESTING: bool = False
 
 
 class Config(object):
@@ -17,13 +29,15 @@ class Config(object):
     def __init__(self, flask_config: FlaskConfig):
         self.flask_config = flask_config
 
+    # noinspection PyPep8Naming
     @property
-    def DATABASE_URI() -> str:
+    def DATABASE_URI(self) -> str:
         return "sqlite:///:memory:"
 
+    # noinspection PyPep8Naming
     @property
     @abc.abstractmethod
-    def FEATURE_ENABLED() -> bool:
+    def FEATURE_ENABLED(self) -> bool:
         pass
 
 

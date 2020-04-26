@@ -1,1 +1,5 @@
-# def test_env():
+import pytest
+
+
+def test_env():
+    assert True

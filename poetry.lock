@@ -95,6 +95,18 @@ dotenv = ["python-dotenv"]
 
 [[package]]
 category = "main"
+description = "Adds Injector, a Dependency Injection framework, support to Flask."
+name = "flask-injector"
+optional = false
+python-versions = "*"
+version = "0.12.3"
+
+[package.dependencies]
+Flask = "*"
+injector = ">=0.10.0"
+
+[[package]]
+category = "main"
 description = "Injector - Python dependency injection framework, inspired by Guice"
 name = "injector"
 optional = false
@@ -224,6 +236,18 @@ pytest = ">=2.6.0"
 
 [[package]]
 category = "dev"
+description = "A rspec format reporter for Python ptest"
+name = "pytest-pspec"
+optional = false
+python-versions = "*"
+version = "0.0.3"
+
+[package.dependencies]
+pytest = ">=3.0.0"
+six = ">=1.11.0"
+
+[[package]]
+category = "dev"
 description = "Alternative regular expression module, to replace re."
 name = "regex"
 optional = false
@@ -291,7 +315,7 @@ dev = ["pytest", "pytest-timeout", "coverage", "tox", "sphinx", "pallets-sphinx-
 watchdog = ["watchdog"]
 
 [metadata]
-content-hash = "710d6b48790881730d0009aeef47aedb0470f113ff1c91cfd766ce8021f1d598"
+content-hash = "9c4a97f9f1465ff351485dac09d620b37f83fb080080053c8c1bd963091c80dc"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -325,6 +349,10 @@ expects = [
 flask = [
     {file = "Flask-1.1.2-py2.py3-none-any.whl", hash = "sha256:8a4fdd8936eba2512e9c85df320a37e694c93945b33ef33c89946a340a238557"},
     {file = "Flask-1.1.2.tar.gz", hash = "sha256:4efa1ae2d7c9865af48986de8aeb8504bf32c7f3d6fdc9353d34b21f4b127060"},
+]
+flask-injector = [
+    {file = "Flask-Injector-0.12.3.tar.gz", hash = "sha256:82f5bf1245f6fbdbd19eeea4289fe35a3417a8ce05f710847a2f96b771a8085c"},
+    {file = "Flask_Injector-0.12.3-py2.py3-none-any.whl", hash = "sha256:d0a5449b7d5f67f259a97e27dfb1111b48cfa418bce29d01c3beaa3493e248e4"},
 ]
 injector = [
     {file = "injector-0.18.3-py2.py3-none-any.whl", hash = "sha256:04c15a965504c4628873a56886950bd254102552a1d41ee983bfb1a7f7c7e7d6"},
@@ -405,6 +433,10 @@ pytest-describe = [
     {file = "pytest-describe-1.0.0.tar.gz", hash = "sha256:3e2ea0e77efa09edb98cf90423bf1da21a462ed90bd3120f8f98fe7519a167d5"},
     {file = "pytest_describe-1.0.0-py2-none-any.whl", hash = "sha256:cc3862662faa5a6fb721927aaef46b46cf787e4a8163e5459fc8778e650fabad"},
     {file = "pytest_describe-1.0.0-py3-none-any.whl", hash = "sha256:95fe78639d4d16c4a1e7d62c70f63030b217c08d2ee6dca49559fe6e730c6696"},
+]
+pytest-pspec = [
+    {file = "pytest-pspec-0.0.3.tar.gz", hash = "sha256:14274721d4b1ac500a7d133c7a84af26b921dbe942dbf175512ae16225647968"},
+    {file = "pytest_pspec-0.0.3-py2.py3-none-any.whl", hash = "sha256:6302a692fe3ebd5ee6aea6e458f2455ba8768b57d4571118a28d8d5bbdbb57d0"},
 ]
 regex = [
     {file = "regex-2020.4.4-cp27-cp27m-win32.whl", hash = "sha256:90742c6ff121a9c5b261b9b215cb476eea97df98ea82037ec8ac95d1be7a034f"},

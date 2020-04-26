@@ -13,6 +13,11 @@ tasks:
     env:
       FLASK_APP: funicular
       FLASK_ENV: development
+  test:
+    cmds:
+      - poetry run pytest tests/
+    env:
+      FLASK_ENV: test
   dependencies:
     cmds:
       - poetry install
