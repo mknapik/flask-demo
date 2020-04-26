@@ -2,11 +2,10 @@
 
 version: '2'
 
-vars:
-  GREETING: Hello, World!
-
 tasks:
   default:
+    deps: [test, format]
+  run:
     cmds:
       - poetry run flask run
     silent: true
@@ -18,9 +17,32 @@ tasks:
       - poetry run pytest -s tests/
     env:
       FLASK_ENV: test
+  test:watch:
+    cmds:
+      - find . | entr task test
   dependencies:
     cmds:
       - poetry install
   format:
     cmds:
-      - black .
+      - poetry run black .
+  bootstrap:
+    deps: [prerequisites]
+    cmds:
+      - task: dependencies
+  prerequisites:
+    deps: [prerequisites:poetry, prerequisites:entr]
+  prerequisites:poetry:
+    cmds:
+      - echo Install poetry
+      - exit 1
+    silent: true
+    status:
+      - command -v poetry
+  prerequisites:entr:
+    cmds:
+      - echo Install entr
+      - exit 1
+    silent: true
+    status:
+      - command -v entr
