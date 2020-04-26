@@ -8,4 +8,4 @@ from funicular.serializer.serializer import Serializer
 @singleton
 class UserSerializer(Serializer):
     def serialize(self, user: User) -> Dict:
-        return {"id": user.id, "type": "users", "attributes": {"name": user.name}}
+        return {"id": str(user.id), "type": "users", "attributes": {"name": user.name}}
